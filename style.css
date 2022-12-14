@@ -4,11 +4,16 @@
     box-sizing: border-box;
 }
 
+.wrapper{
+    display: flex;
+    flex-direction: column;
+}
 td {
     background-color: rgb(5, 13, 29);
     width: 16px;
     height: 16px;
     border: none;
+    position: relative;
 }
 
 table {
@@ -27,4 +32,25 @@ table {
 .game_field {
     width: 1400px;
     height: 600px;
+}
+
+.game_field img{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.score{
+    color: white;
+    font-weight: 700;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+
+.score p{
+    display: inline;
+}
+
+.bigFood{
+    z-index: 100;
 }
