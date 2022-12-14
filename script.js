@@ -6,8 +6,8 @@ function createTable (size) {
     let table = document.createElement('table');
     let height = gameField.getBoundingClientRect().height;
     let width = gameField.getBoundingClientRect().width;
-    let countI = width / 20;
-    let countJ = height / 20;
+    let countI = width / size;
+    let countJ = height / size;
     
 
     for(let i = 0; i < countJ; i++) {
@@ -25,4 +25,4 @@ function createTable (size) {
     gameField.append(table);
 };
 
-createTable(20, 20);
+createTable(18);
