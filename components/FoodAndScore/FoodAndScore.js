@@ -24,3 +24,12 @@ function plusScore() {
     counterScore = counterScore + 1
     score.lastElementChild.textContent = `${counterScore}` 
 }
+
+
+
+// for(let i of TDS) {
+//     let img = document.createElement('img');
+//     img.src = './components/FoodAndScore/img/apple.png';
+//     i.append(img);
+//     console.log(444)
+// };
