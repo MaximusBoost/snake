@@ -16,6 +16,9 @@ function moveSnake(numberSnake) {
     let timerIdLeft;
     let timerIdTop;
     let speed = 100;
+
+    let arrWithTds = [];
+
     function checkFood() {
         if(TDS[numberSnake].lastElementChild) {
             TDS[numberSnake].lastElementChild.remove();
@@ -34,14 +37,22 @@ function moveSnake(numberSnake) {
 
 
 
-            if(TDS[numberSnake + 1]) TDS[numberSnake + 1].classList.add('snake');
-
             if(counterScore) {
-                if(TDS[numberSnake - counterScore]) TDS[numberSnake - counterScore].classList.remove('snake');
-                console.log(44444);
+
+                if(TDS[numberSnake + 1]) {
+                    TDS[numberSnake + 1].classList.add('snake');
+                    arrWithTds.push( TDS[numberSnake + 1] );
+                };
+
+                setTimeout( () => {
+                    arrWithTds[0].classList.remove('snake');
+                    arrWithTds.splice(0, 1);
+                }, speed * (counterScore + 1) );
+
             } else {
+                if(TDS[numberSnake + 1]) TDS[numberSnake + 1].classList.add('snake');
                 if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
-            }
+            };
             // if(counterScore) increaseSnake(counterScore, 'right', numberSnake);
             numberSnake++;
             checkFood();
@@ -60,9 +71,19 @@ function moveSnake(numberSnake) {
             // if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
 
             if(counterScore) {
-                if(TDS[numberSnake + counterScore]) TDS[numberSnake + counterScore].classList.remove('snake');
-                console.log(44444);
+
+                if(TDS[numberSnake - 1]) {
+                    TDS[numberSnake - 1].classList.add('snake');
+                    arrWithTds.push( TDS[numberSnake - 1] );
+                };
+
+                setTimeout( () => {
+                    arrWithTds[0].classList.remove('snake');
+                    arrWithTds.splice(0, 1);
+                }, speed * (counterScore + 1) );
+
             } else {
+                if(TDS[numberSnake]) TDS[numberSnake - 1].classList.add('snake');
                 if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
             }
 
@@ -83,9 +104,20 @@ function moveSnake(numberSnake) {
             // if (TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
 
             if(counterScore) {
+                
+                if(TDS[numberSnake - 78]) {
+                    TDS[numberSnake - 78].classList.add('snake');
+                    arrWithTds.push( TDS[numberSnake - 78] );
+                };
+
+                setTimeout( () => {
+                    arrWithTds[0].classList.remove('snake');
+                    arrWithTds.splice(0, 1);
+                }, speed * (counterScore + 1) );
+
                 if(TDS[numberSnake + 78*+counterScore]) TDS[numberSnake + 78*+counterScore].classList.remove('snake');
-                console.log(44444);
             } else {
+                TDS[numberSnake - 78].classList.add('snake');
                 if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
             }
 
@@ -107,8 +139,19 @@ function moveSnake(numberSnake) {
             // if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
 
             if(counterScore) {
-                if(TDS[numberSnake - 78*+counterScore]) TDS[numberSnake - 78*+counterScore].classList.remove('snake');
+                
+                if(TDS[numberSnake + 78]) {
+                    TDS[numberSnake + 78].classList.add('snake');
+                    arrWithTds.push( TDS[numberSnake + 78] );
+                };
+
+                setTimeout( () => {
+                    arrWithTds[0].classList.remove('snake');
+                    arrWithTds.splice(0, 1);
+                }, speed * (counterScore + 1) );
+
             } else {
+                TDS[numberSnake + 78].classList.add('snake');
                 if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
             }
 
@@ -217,3 +260,36 @@ function moveSnake(numberSnake) {
     })
 }
 moveSnake(index);
+
+// 
+// function moveRight() {
+//     timerIdRight =  setInterval( () => {
+//     if(numberSnake%78 == 77) {
+//         if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
+//         numberSnake -= 78;
+//     };
+
+
+
+//     if(counterScore) {
+
+//         if(TDS[numberSnake + 1]) {
+//             TDS[numberSnake + 1].classList.add('snake');
+//             arrWithTds.push( TDS[numberSnake + 1] );
+//         };
+
+//         setTimeout( () => {
+//             arrWithTds[0].classList.remove('snake');
+//             arrWithTds.splice(0, 1);
+//         }, speed * counterScore++ );
+        
+//     } else {
+//         if(TDS[numberSnake + 1]) TDS[numberSnake + 1].classList.add('snake');
+//         if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
+//     };
+//     // if(counterScore) increaseSnake(counterScore, 'right', numberSnake);
+//     numberSnake++;
+//     checkFood();
+//     console.log('---------');
+// }, speed);
+// }
