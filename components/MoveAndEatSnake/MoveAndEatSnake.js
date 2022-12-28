@@ -31,13 +31,17 @@ function moveSnake(numberSnake) {
     function moveRight() {
             timerIdRight =  setInterval( () => {
             if(numberSnake%78 == 77) {
-                if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
+                if(TDS[numberSnake] && !counterScore) TDS[numberSnake].classList.remove('snake');
                 numberSnake -= 78;
             };
 
 
 
             if(counterScore) {
+
+                if(counterScore == 1) {
+                    if(TDS[numberSnake]) TDS[numberSnake - 1].classList.remove('snake');
+                };
 
                 if(TDS[numberSnake + 1]) {
                     TDS[numberSnake + 1].classList.add('snake');
@@ -63,7 +67,7 @@ function moveSnake(numberSnake) {
     function moveLeft() {
             timerIdLeft = setInterval( () => {
                 if(numberSnake%78 == 0) {
-                if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
+                if(TDS[numberSnake] && !counterScore) TDS[numberSnake].classList.remove('snake');
                 numberSnake += 78;
             };
 
@@ -71,6 +75,10 @@ function moveSnake(numberSnake) {
             // if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
 
             if(counterScore) {
+
+                if(counterScore == 1) {
+                    if(TDS[numberSnake]) TDS[numberSnake + 1].classList.remove('snake');
+                };
 
                 if(TDS[numberSnake - 1]) {
                     TDS[numberSnake - 1].classList.add('snake');
@@ -95,7 +103,7 @@ function moveSnake(numberSnake) {
     function moveTop() {
             timerIdTop =  setInterval( () => {
             if(numberSnake < 78) {
-                TDS[numberSnake].classList.remove('snake');
+                if(TDS[numberSnake] && !counterScore) TDS[numberSnake].classList.remove('snake');
                 let num = 2652;
                 numberSnake += num;
             }
@@ -130,7 +138,7 @@ function moveSnake(numberSnake) {
 
             timerIdBottom = setInterval( () => {
             if(numberSnake >= 2574) {
-                TDS[numberSnake].classList.remove('snake');
+                if(TDS[numberSnake] && !counterScore) TDS[numberSnake].classList.remove('snake');
                 let num = 2652;
                 numberSnake -= num;
             }
