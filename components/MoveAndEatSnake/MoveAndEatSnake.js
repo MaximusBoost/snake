@@ -301,3 +301,4 @@ moveSnake(index);
 //     console.log('---------');
 // }, speed);
 // }
+moveSnake(index);
