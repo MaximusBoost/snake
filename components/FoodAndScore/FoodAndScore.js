@@ -1,6 +1,6 @@
 'use strict'
 let counter = 0 // счетчик для перебора элементов в массиве для еды
-let counterScore = 0 // общий счет для игры
+let counterScore = 100 // общий счет для игры
 
 
 let arrForFood = ['./components/FoodAndScore/img/apple.png', './components/FoodAndScore/img/cabbage.png',
@@ -24,12 +24,3 @@ function plusScore() {
     counterScore = counterScore + 1
     score.lastElementChild.textContent = `${counterScore}` 
 }
-
-
-
-// for(let i of TDS) {
-//     let img = document.createElement('img');
-//     img.src = './components/FoodAndScore/img/apple.png';
-//     i.append(img);
-//     console.log(444)
-// };

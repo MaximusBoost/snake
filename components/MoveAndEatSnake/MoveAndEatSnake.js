@@ -6,7 +6,7 @@ function createSnake() {
 let index = createSnake()
 
 function moveSnake(numberSnake) {
-    
+    // запрещено движение в обратном направления и доработан event.repeat + gameover на примитиве
     let top = false;
     let right = false;
     let bottom = false;
@@ -30,11 +30,19 @@ function moveSnake(numberSnake) {
     
     function moveRight() {
             timerIdRight =  setInterval( () => {
+
+
+                if(TDS[numberSnake + 1]) {
+                    if(TDS[numberSnake + 1].classList.contains('snake')) {
+                        gameOver(timerIdRight)
+                    }
+                }
+
+
             if(numberSnake%78 == 77) {
                 if(TDS[numberSnake] && !counterScore) TDS[numberSnake].classList.remove('snake');
                 numberSnake -= 78;
             };
-
 
 
             if(counterScore) {
@@ -57,22 +65,30 @@ function moveSnake(numberSnake) {
                 if(TDS[numberSnake + 1]) TDS[numberSnake + 1].classList.add('snake');
                 if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
             };
-            // if(counterScore) increaseSnake(counterScore, 'right', numberSnake);
+
             numberSnake++;
             checkFood();
-            console.log('---------');
         }, speed);
     }
 
     function moveLeft() {
             timerIdLeft = setInterval( () => {
+
+
+                if(TDS[numberSnake - 1]) {
+                    if(TDS[numberSnake - 1].classList.contains('snake')) {
+                        gameOver(timerIdLeft)
+                    }
+                }
+
+
                 if(numberSnake%78 == 0) {
                 if(TDS[numberSnake] && !counterScore) TDS[numberSnake].classList.remove('snake');
                 numberSnake += 78;
             };
 
+
             if(TDS[numberSnake]) TDS[numberSnake - 1].classList.add('snake');
-            // if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
 
             if(counterScore) {
 
@@ -97,11 +113,21 @@ function moveSnake(numberSnake) {
 
             numberSnake--;
             checkFood();
+           
         },speed);
     }
 
     function moveTop() {
             timerIdTop =  setInterval( () => {
+
+
+                if(TDS[numberSnake - 78]) {
+                    if(TDS[numberSnake - 78].classList.contains('snake')) {
+                        gameOver(timerIdTop)
+                    }
+                }
+
+
             if(numberSnake < 78) {
                 if(TDS[numberSnake] && !counterScore) TDS[numberSnake].classList.remove('snake');
                 let num = 2652;
@@ -109,7 +135,6 @@ function moveSnake(numberSnake) {
             }
 
             TDS[numberSnake - 78].classList.add('snake');
-            // if (TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
 
             if(counterScore) {
                 
@@ -131,12 +156,22 @@ function moveSnake(numberSnake) {
 
             numberSnake = numberSnake - 78;
             checkFood();
+            
         },speed);
     }
 
     function moveBottom() {
 
             timerIdBottom = setInterval( () => {
+
+
+                if(TDS[numberSnake + 78]) {
+                    if(TDS[numberSnake + 78].classList.contains('snake')) {
+                        gameOver(timerIdBottom)
+                    }
+                }
+
+
             if(numberSnake >= 2574) {
                 if(TDS[numberSnake] && !counterScore) TDS[numberSnake].classList.remove('snake');
                 let num = 2652;
@@ -144,7 +179,6 @@ function moveSnake(numberSnake) {
             }
 
             TDS[numberSnake + 78].classList.add('snake');
-            // if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
 
             if(counterScore) {
                 
@@ -165,20 +199,24 @@ function moveSnake(numberSnake) {
 
             numberSnake = numberSnake + 78;
             checkFood();
+            
         },speed);
     }
 
     document.addEventListener('keydown', function(event) {
         if( event.code.toLowerCase() == 'arrowdown') {
-            if (event.repeat == true) return;
-
+            if(bottom) return
+            if(counterScore > 0) {
+                if(top) return // если уже идем в этом или обратном направлениях - выйти
+            } else {
+                if(top) {
+                    clearInterval(timerIdTop);
+                    top = false;
+                }
+            }
             if(left) {
                 clearInterval(timerIdLeft);
                 left = false;
-            }
-            if(top) {
-                clearInterval(timerIdTop);
-                top = false;
             }
             if(right) {
                 clearInterval(timerIdRight);
@@ -194,7 +232,15 @@ function moveSnake(numberSnake) {
 
     document.addEventListener('keydown', function (event) {
         if( event.code.toLowerCase() == 'arrowleft') {
-            if (event.repeat == true) return;
+            if(left) return
+            if(counterScore > 0) {
+                if(right) return // если уже идем в этом или обратном направлениях - выйти
+            } else {
+                if(right) {
+                clearInterval(timerIdRight);
+                right = false;
+            }
+            }
 
             if(bottom) {
                 clearInterval(timerIdBottom);
@@ -203,10 +249,6 @@ function moveSnake(numberSnake) {
             if(top) {
                 clearInterval(timerIdTop);
                 top = false;
-            }
-            if(right) {
-                clearInterval(timerIdRight);
-                right = false;
             }
             if(left) {
                 clearInterval(timerIdLeft);
@@ -219,15 +261,19 @@ function moveSnake(numberSnake) {
 
     document.addEventListener('keydown', function (event) {
         if( event.code.toLowerCase() == 'arrowup') {
-            if (event.repeat == true) return;
-
+            if(top) return
+            if(counterScore > 0) {
+                if(bottom) return // если уже идем в этом или обратном направлениях - выйти
+            } else {
+                if(bottom) {
+                    clearInterval(timerIdBottom);
+                    bottom = false;
+                }
+            }
+            
             if(left) {
                 clearInterval(timerIdLeft);
                 left = false;
-            }
-            if(bottom) {
-                clearInterval(timerIdBottom);
-                bottom = false;
             }
             if(right) {
                 clearInterval(timerIdRight);
@@ -244,12 +290,17 @@ function moveSnake(numberSnake) {
 
     document.addEventListener('keydown', function (event) {
         if( event.code.toLowerCase() == 'arrowright') {
-            if (event.repeat == true) return;
-
-            if(left) {
-                clearInterval(timerIdLeft);
-                left = false;
+            if(right) return
+            if(counterScore > 0) {
+                if(left) return  // если уже идем в этом или обратном направлениях - выйти
+            } else {
+                if(left) {
+                    clearInterval(timerIdLeft);
+                    left = false;
+                }
             }
+            
+
             if(top) {
                 clearInterval(timerIdTop);
                 top = false;
@@ -269,36 +320,3 @@ function moveSnake(numberSnake) {
 }
 moveSnake(index);
 
-// 
-// function moveRight() {
-//     timerIdRight =  setInterval( () => {
-//     if(numberSnake%78 == 77) {
-//         if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
-//         numberSnake -= 78;
-//     };
-
-
-
-//     if(counterScore) {
-
-//         if(TDS[numberSnake + 1]) {
-//             TDS[numberSnake + 1].classList.add('snake');
-//             arrWithTds.push( TDS[numberSnake + 1] );
-//         };
-
-//         setTimeout( () => {
-//             arrWithTds[0].classList.remove('snake');
-//             arrWithTds.splice(0, 1);
-//         }, speed * counterScore++ );
-        
-//     } else {
-//         if(TDS[numberSnake + 1]) TDS[numberSnake + 1].classList.add('snake');
-//         if(TDS[numberSnake]) TDS[numberSnake].classList.remove('snake');
-//     };
-//     // if(counterScore) increaseSnake(counterScore, 'right', numberSnake);
-//     numberSnake++;
-//     checkFood();
-//     console.log('---------');
-// }, speed);
-// }
-moveSnake(index);
