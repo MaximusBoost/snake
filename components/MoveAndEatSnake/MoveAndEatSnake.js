@@ -47,7 +47,7 @@ function moveSnake(numberSnake) {
             if(counterScore) {
 
                 if(counterScore == 1) {
-                    if(TDS[numberSnake]) TDS[numberSnake - 1].classList.remove('snake');
+                    if(TDS[numberSnake - 1]) TDS[numberSnake - 1].classList.remove('snake');
                 };
 
                 if(TDS[numberSnake + 1]) {
@@ -92,7 +92,7 @@ function moveSnake(numberSnake) {
             if(counterScore) {
 
                 if(counterScore == 1) {
-                    if(TDS[numberSnake]) TDS[numberSnake + 1].classList.remove('snake');
+                    if(TDS[numberSnake + 1]) TDS[numberSnake + 1].classList.remove('snake');
                 };
 
                 if(TDS[numberSnake - 1]) {
@@ -136,6 +136,10 @@ function moveSnake(numberSnake) {
             TDS[numberSnake - 78].classList.add('snake');
 
             if(counterScore) {
+
+                if(counterScore == 1) {
+                    if(TDS[numberSnake + 78]) TDS[numberSnake + 78].classList.remove('snake');
+                };
                 
                 if(TDS[numberSnake - 78]) {
                     TDS[numberSnake - 78].classList.add('snake');
@@ -180,6 +184,10 @@ function moveSnake(numberSnake) {
             TDS[numberSnake + 78].classList.add('snake');
 
             if(counterScore) {
+
+                if(counterScore == 1) {
+                    if(TDS[numberSnake - 78]) TDS[numberSnake - 78].classList.remove('snake');
+                };
                 
                 if(TDS[numberSnake + 78]) {
                     TDS[numberSnake + 78].classList.add('snake');
