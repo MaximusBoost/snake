@@ -203,7 +203,7 @@ function moveSnake(numberSnake) {
         },speed);
     }
 
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', moveBottomSide = function(event) {
         if( event.code.toLowerCase() == 'arrowdown') {
             if(bottom) return
             if(counterScore > 0) {
@@ -230,7 +230,7 @@ function moveSnake(numberSnake) {
         }
     })
 
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown',moveLeftSide = function (event) {
         if( event.code.toLowerCase() == 'arrowleft') {
             if(left) return
             if(counterScore > 0) {
@@ -259,7 +259,7 @@ function moveSnake(numberSnake) {
         }
     })
 
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', moveTopSide = function (event) {
         if( event.code.toLowerCase() == 'arrowup') {
             if(top) return
             if(counterScore > 0) {
@@ -288,7 +288,7 @@ function moveSnake(numberSnake) {
         }
     })
 
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', moveRightSide =  function (event) {
         if( event.code.toLowerCase() == 'arrowright') {
             if(right) return
             if(counterScore > 0) {
