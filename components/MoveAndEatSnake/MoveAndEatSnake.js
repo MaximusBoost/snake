@@ -6,7 +6,6 @@ function createSnake() {
 let index = createSnake()
 
 function moveSnake(numberSnake) {
-    // запрещено движение в обратном направления и доработан event.repeat + gameover на примитиве
     let top = false;
     let right = false;
     let bottom = false;

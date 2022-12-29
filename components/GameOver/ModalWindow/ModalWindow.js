@@ -20,6 +20,7 @@ function _createModalWindowForRecordingResult() {
     `)
     document.body.appendChild(modalWindow);
     return modalWindow;
+    
 }
 
 function _createModalWindowForConfirm() {
