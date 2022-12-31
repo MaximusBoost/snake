@@ -16,37 +16,16 @@ function gameOver(timer) { // выполняется при каждом про�
     score.lastElementChild.textContent = 0; // обнуление счетчика результата
 
     removeEventListenerForAllButtons(); // снятие всех обработчиков с кнопок
+    
 
     let listenerFirstModalWindow = document.getElementById('buttonForRecord'); 
     listenerFirstModalWindow.addEventListener('click', function() {  // добавление обработчика на кнопку OF COURSE первого модального окна
-
-    continueComplitingScript() // продолжение выполнения скрипта
+        continueComplitingScript(); // продолжение выполнения скрипта
     });
 
     let listenerSecondModalWindow = document.getElementById('buttonForRecordName');
     listenerSecondModalWindow.addEventListener('click', function() { // добавление обработчика на кнопку OK второго модального окна
-
-        modalWindowForConfirm = $.modal(_createModalWindowForConfirm); // создаем подтверждающее модальное окно
-        modalWindowForTableRecord = $.modal(_createModalWindowForTableRecords);
-
-        modalWindowForRecordName.close(); // закрытие второго модального окна с совершающейся анимацией
-       
-
-        setTimeout( () => {
-            recordResult(); // после этой задержки открывается модальное окно уведомляющее об совершенной записи в localStorage
-        },200);
-
-        setTimeout(() => {
-            modalWindowForRecordName.destroy(); // второе модальное окно уничтожается дабы не засорять DOM
-        }, 200);
-
-        setTimeout(() => { // задержка в 1.5с для прохождения анимации подтверждающего окна
-            addEventListenerForAllButtons(); // добавление обработчиков на все кнопки чтобы можно было начать новую игру
-        },1500);
-        
-        setTimeout( () => {
-            modalWindowForTableRecord.open();
-        },2000);
+       continueComplitingScript();
     });
 };
 
@@ -97,14 +76,36 @@ function continueComplitingScript() {
        
         setTimeout( () => {
             modalWindowForRecordName.open(); // после этой задержки открывается второе модальное окно
+            let userName = document.querySelector('#userName')
+            console.log(userName.value)
         },200);
 
         setTimeout(() => {
             modalWindowForRecordingResult.destroy(); // первое модальное окно уничтожается дабы не засорять DOM
-        }, 200);
-    };    
+            flag = true;
+        }, 200);   
+    };
 
-    // if(modalWindowForRecordName)
+    if(flag) {
+        modalWindowForConfirm = $.modal(_createModalWindowForConfirm); // создаем подтверждающее модальное окно
+        modalWindowForTableRecord = $.modal(_createModalWindowForTableRecords);
+
+        modalWindowForRecordName.close(); // закрытие второго модального окна с совершающейся анимацией
+       
+
+        setTimeout( () => {
+            recordResult(); // после этой задержки открывается модальное окно уведомляющее об совершенной записи в localStorage
+        },200);
+
+        setTimeout(() => {
+            modalWindowForRecordName.destroy(); // второе модальное окно уничтожается дабы не засорять DOM
+        }, 200);
+        
+        setTimeout( () => {
+            modalWindowForTableRecord.open();
+            flag = false
+        },2000);
+    };    
 };
 
 document.addEventListener('click',listenerForClose =  function(event) { // общий обработчик на весь документ для закрытия модальных окон
@@ -112,15 +113,15 @@ document.addEventListener('click',listenerForClose =  function(event) { // об�
     if(!target) return;
     if(target) {
         closeModalWindow();
-    }
+    };
 });
 
 document.addEventListener('keydown', function(event) { // общий обработчик на escape и enter
-    if(event.code.toLowerCase() == 'escape') {
+    if(event.code == 'Escape') {
         closeModalWindow();
     };
     
-    if(event.code.toLowerCase() == 'enter') {
-        continueComplitingScript()
+    if(event.code == 'Enter') {
+        continueComplitingScript();
     };
 });

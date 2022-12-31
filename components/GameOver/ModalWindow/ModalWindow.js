@@ -33,7 +33,7 @@ function _createModalWindowForRecordName () {
                 <span class="modal-close"  data-close="true">&times;</span>
             </div>
             <div class="modal-body">
-                <input type="text">
+                <input type="text" id="userName">
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" id="buttonForRecordName">Ok</button>
@@ -77,13 +77,7 @@ function _createModalWindowForTableRecords() {
                 <span class="modal-close"  data-close="true">&times;</span>
             </div>
             <div class="modal-body">
-                <table>
-                    
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="buttonForRecord">OF COURSE</button>
-                <button class="btn btn-danger" data-close="true">No</button>
+                Сюда динамически должна подгружаться таблица из LocaleStorage mr Bekrin
             </div>
         </div>
     </div>
