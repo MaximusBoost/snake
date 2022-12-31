@@ -326,4 +326,3 @@ function moveSnake(numberSnake) {
     })
 }
 moveSnake(index);
-

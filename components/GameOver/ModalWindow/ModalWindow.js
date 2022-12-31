@@ -12,7 +12,7 @@ function _createModalWindowForRecordingResult() {
                 Do you want to record your result?
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" id="buttonForRecords">OF COURSE</button>
+                <button class="btn btn-primary" id="buttonForRecord">OF COURSE</button>
                 <button class="btn btn-danger" data-close="true">No</button>
             </div>
         </div>
@@ -20,14 +20,38 @@ function _createModalWindowForRecordingResult() {
     `)
     document.body.appendChild(modalWindow);
     return modalWindow;
-    
 }
+
+function _createModalWindowForRecordName () {
+    let modalWindow = document.createElement('div');
+    modalWindow.classList.add('vmodal', 'hidden');
+    modalWindow.insertAdjacentHTML('afterbegin', `
+    <div class="modal-overlay" data-close="true">
+        <div class="modal-window">
+            <div class="modal-header">
+                <span class="modal-title">Enter your name</span>
+                <span class="modal-close"  data-close="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="text">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="buttonForRecordName">Ok</button>
+                <button class="btn btn-danger" data-close="true">Cancel</button>
+            </div>
+        </div>
+    </div>
+    `)
+    document.body.appendChild(modalWindow);
+    return modalWindow;
+}
+
 
 function _createModalWindowForConfirm() {
     let modalWindow = document.createElement('div');
     modalWindow.classList.add('vmodal', 'hidden');
     modalWindow.insertAdjacentHTML('afterbegin', `
-    <div class="modal-overlay" data-close="true">
+    <div class="modal-overlay">
         <div class="modal-window">
             <div class="modal-confirm-header">
                 <img src="components/GameOver/ModalWindow/img/confirm.png">
@@ -42,6 +66,31 @@ function _createModalWindowForConfirm() {
     return modalWindow;
 }
 
+function _createModalWindowForTableRecords() {
+    let modalWindow = document.createElement('div');
+    modalWindow.classList.add('vmodal', 'hidden');
+    modalWindow.insertAdjacentHTML('afterbegin', `
+    <div class="modal-overlay" data-close="true">
+        <div class="modal-window">
+            <div class="modal-header">
+                <span class="modal-title" id="title">Table of records</span>
+                <span class="modal-close"  data-close="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                <table>
+                    
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="buttonForRecord">OF COURSE</button>
+                <button class="btn btn-danger" data-close="true">No</button>
+            </div>
+        </div>
+    </div>
+    `)
+    document.body.appendChild(modalWindow);
+    return modalWindow;
+}
 $.modal = function(someCreateFunction) {
     let $modal = someCreateFunction();
     let ANIMATION_SPEED = 200;
@@ -69,12 +118,12 @@ $.modal = function(someCreateFunction) {
             },ANIMATION_SPEED);
         },
         destroy() {
-            $modal.parentElement.removeChild($modal);
-            document.removeEventListener('click', listenerForClose);
+            if($modal.parentElement) $modal.parentElement.removeChild($modal);
+            // document.removeEventListener('click', listenerForClose);
             destroyed = true;
         },
     }
 }
 
-modalWindowForConfirm = $.modal(_createModalWindowForConfirm);
+
 

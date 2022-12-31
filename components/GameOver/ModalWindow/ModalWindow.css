@@ -86,3 +86,13 @@
     justify-content: space-around;
     border-bottom: 1px solid green;
 }
+
+/* --------------------------------------------------------------------------------------- */
+
+.modal-body input{
+    border-radius: 5px;
+    width: 90%;
+    border: 2px solid green;
+    background-color: rgba(46, 43, 75, 0.5);
+    color: white;
+}
