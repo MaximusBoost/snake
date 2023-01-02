@@ -76,8 +76,8 @@ function continueComplitingScript() {
        
         setTimeout( () => {
             modalWindowForRecordName.open(); // после этой задержки открывается второе модальное окно
-            let userName = document.querySelector('#userName')
-            console.log(userName.value)
+            // let userName = document.querySelector('#userName')
+            // console.log(userName.value)
         },200);
 
         setTimeout(() => {
@@ -87,24 +87,27 @@ function continueComplitingScript() {
     };
 
     if(flag) {
-        modalWindowForConfirm = $.modal(_createModalWindowForConfirm); // создаем подтверждающее модальное окно
-        modalWindowForTableRecord = $.modal(_createModalWindowForTableRecords);
+        if(!(modalWindowForConfirm && modalWindowForTableRecord)) { // если окна не существуют тогда создаем иначе ничего не происходит
+            modalWindowForConfirm = $.modal(_createModalWindowForConfirm); // создаем подтверждающее модальное окно
+            modalWindowForTableRecord = $.modal(_createModalWindowForTableRecords);
 
-        modalWindowForRecordName.close(); // закрытие второго модального окна с совершающейся анимацией
-       
-
-        setTimeout( () => {
-            recordResult(); // после этой задержки открывается модальное окно уведомляющее об совершенной записи в localStorage
-        },200);
-
-        setTimeout(() => {
-            modalWindowForRecordName.destroy(); // второе модальное окно уничтожается дабы не засорять DOM
-        }, 200);
+            modalWindowForRecordName.close(); // закрытие второго модального окна с совершающейся анимацией
         
-        setTimeout( () => {
-            modalWindowForTableRecord.open();
-            flag = false
-        },2000);
+
+            setTimeout( () => {
+                recordResult(); // после этой задержки открывается модальное окно уведомляющее об совершенной записи в localStorage
+            },200);
+
+            setTimeout(() => {
+                modalWindowForRecordName.destroy(); // второе модальное окно уничтожается дабы не засорять DOM
+            }, 200);
+            
+            setTimeout( () => {
+                modalWindowForTableRecord.open();
+                flag = false
+            },2000);
+        }
+        
     };    
 };
 

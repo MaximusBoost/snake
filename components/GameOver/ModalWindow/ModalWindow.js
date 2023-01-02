@@ -1,3 +1,24 @@
+function _createModalWindowForGameOver() {
+    let modalWindow = document.createElement('div');
+    modalWindow.classList.add('vmodal', 'hidden');
+    modalWindow.insertAdjacentHTML('afterbegin', `
+    <div class="modal-overlay" data-close="true">
+        <div class="modal-window">
+            <div class="modal-header">
+                <span class="modal-title" id="title"> Score: ${counterScore}</span>
+                <span class="modal-close"  data-close="true">&times;</span>
+            </div>
+            <div class="modal-body">
+                GAME IS OVER
+            </div>
+        </div>
+    </div>
+    `)
+    document.body.appendChild(modalWindow);
+    return modalWindow;
+}
+
+
 function _createModalWindowForRecordingResult() {
     let modalWindow = document.createElement('div');
     modalWindow.classList.add('vmodal', 'hidden');
@@ -118,6 +139,3 @@ $.modal = function(someCreateFunction) {
         },
     }
 }
-
-
-
