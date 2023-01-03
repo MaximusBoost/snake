@@ -12,7 +12,6 @@ function gameOver(timer) { // выполняется при каждом про�
     modalWindowForRecordName = $.modal(_createModalWindowForRecordName);
 
     modalWindowForRecordingResult.open(); // открытие первого модального окна
-    counterScore = 0; // обнуление переменной результата
     score.lastElementChild.textContent = 0; // обнуление счетчика результата
 
     removeEventListenerForAllButtons(); // снятие всех обработчиков с кнопок
@@ -25,7 +24,25 @@ function gameOver(timer) { // выполняется при каждом про�
 
     let listenerSecondModalWindow = document.getElementById('buttonForRecordName');
     listenerSecondModalWindow.addEventListener('click', function() { // добавление обработчика на кнопку OK второго модального окна
-       continueComplitingScript();
+        
+        let userName = document.querySelector('#userName');
+        let locSt = window.localStorage; // (БЕК) Находим инпут, где УЖЕ введено имя
+        locSt.setItem(userName.value, counterScore); // (БЕК) добавляем в localeStorage имя игрока и имя.
+        let arrRecord = [];
+
+        for(let i = 0; i < locSt.length; i++) { // пушим в массив значения из localeStorage;
+            let currentKey = locSt.key(i);
+            arrRecord.push( {'value':+locSt[currentKey],
+                              'text': `${currentKey}: ${locSt[currentKey]}`} );
+        };
+
+        arrRecord.sort( (a, b) => a.value < b.value ? 1 : -1 );
+
+        counterScore = 0; // (БЕК)
+        continueComplitingScript();
+        for(let i = 0; i < 10; i++) {
+            document.querySelector('#text-records').innerHTML += arrRecord[i].text + '<br>';
+        };
     });
 };
 
@@ -71,14 +88,19 @@ function closeModalWindow() {
 };
 
 function continueComplitingScript() {
-    if(modalWindowForRecordingResult) {
+    
+    if(!flag) {
         modalWindowForRecordingResult.close(); // закрытие первого модального окна с совершающейся анимацией
        
         setTimeout( () => {
             modalWindowForRecordName.open(); // после этой задержки открывается второе модальное окно
+<<<<<<< HEAD
             // let userName = document.querySelector('#userName')
             // console.log(userName.value)
         },200);
+=======
+        }, 1000);
+>>>>>>> 48dfa6b1816e1e34efb2e77f2c210e631d74528d
 
         setTimeout(() => {
             modalWindowForRecordingResult.destroy(); // первое модальное окно уничтожается дабы не засорять DOM

@@ -97,8 +97,7 @@ function _createModalWindowForTableRecords() {
                 <span class="modal-title" id="title">Table of records</span>
                 <span class="modal-close"  data-close="true">&times;</span>
             </div>
-            <div class="modal-body">
-                Сюда динамически должна подгружаться таблица из LocaleStorage mr Bekrin
+            <div class="modal-body" id="text-records">
             </div>
         </div>
     </div>

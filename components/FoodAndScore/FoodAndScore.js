@@ -1,6 +1,6 @@
 'use strict'
 let counter = 0 // счетчик для перебора элементов в массиве для еды
-let counterScore = 10 // общий счет для игры
+let counterScore = 0; // общий счет для игры
 
 
 let arrForFood = ['./components/FoodAndScore/img/apple.png', './components/FoodAndScore/img/cabbage.png',
